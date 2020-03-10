@@ -84,7 +84,7 @@ btnnew.notitle=true
 btnnew.inputstyle = "add"
 btnnew.forcewrite = true
 btnnew.write = function(self, section)
-  luci.http.redirect(luci.dispatcher.build_url("admin/docker/newnetwork"))
+  luci.http.redirect(luci.dispatcher.build_url("admin/services/docker/newnetwork"))
 end
 btnremove = action:option(Button, "_remove")
 btnremove.inputtitle= translate("Remove")
@@ -117,7 +117,7 @@ btnremove.write = function(self, section)
     if success then
       docker:clear_status()
     end
-    luci.http.redirect(luci.dispatcher.build_url("admin/docker/networks"))
+    luci.http.redirect(luci.dispatcher.build_url("admin/services/docker/networks"))
   end
 end
 

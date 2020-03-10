@@ -10,7 +10,7 @@ local dk = docker.new()
 
 m = SimpleForm("docker", translate("Docker"))
 m.template = "dockerman/cbi/xsimpleform"
-m.redirect = luci.dispatcher.build_url("admin", "docker", "networks")
+m.redirect = luci.dispatcher.build_url("admin", "services","docker", "networks")
 
 docker_status = m:section(SimpleSection)
 docker_status.template = "dockerman/apply_widget"
@@ -195,10 +195,10 @@ m.handle = function(self, state, data)
     local res = dk.networks:create({body = create_body})
     if res and res.code == 201 then
       docker:clear_status()
-      luci.http.redirect(luci.dispatcher.build_url("admin/docker/networks"))
+      luci.http.redirect(luci.dispatcher.build_url("admin/services/docker/networks"))
     else
       docker:append_status("code:" .. res.code.." ".. (res.body.message and res.body.message or res.message).. "\n")
-      luci.http.redirect(luci.dispatcher.build_url("admin/docker/newnetwork"))
+      luci.http.redirect(luci.dispatcher.build_url("admin/services/docker/newnetwork"))
     end
   end
 end
